@@ -86,7 +86,6 @@ class TestOrderPage:
 
     @allure.title('Проверка логотипа Яндекс')
     @allure.description('Проверка работы логотипа Яндекс, что он переходит на главную страницу Яндекс')
-    def test_logo_yandex(self, driver):
         # Инициализируем объекты класса
         base_page = BasePage(driver)
         order_page = OrderPage(driver)
