@@ -35,13 +35,4 @@ class OrderPageLocators:
     BLACK_COLOR_ITEM = (By.XPATH, "//input[@id='black']")
     GREY_COLOR_ITEM = (By.XPATH, "//input[@id='grey']")
 
-    # Тестирование логотипа Самокат
-    SAMOKAT_LOGO = (By.XPATH, "//img[@alt='Scooter']")
-    SAMOKAT_LOGO_TEXT = (By.XPATH, "//div[@class='Home_SubHeader__zwi_E']")
-
-    # Тестирование логотипа Яндекс
-    YANDEX_LOGO = (By.XPATH, "//img[@alt='Yandex']")
-    YANDEX_LOGO_TEXT = (By.XPATH, "//div[@class='tabs-menu__title-3y tabs-menu__active-1C']")
-
-
-
+    YANDEX_LOGO_TEXT = (By.XPATH, "//div[@class='Order_Header__BZXOb']")

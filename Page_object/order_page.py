@@ -1,103 +1,102 @@
 import allure
 import pytest
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as ec
-from Page_object.base_page import BasePage
-from Locators.order_page_locators import OrderPageLocators
-from Confest import driver
+from page_object.base_page import BasePage
+from locators.order_page_locators import OrderPageLocators
+from conftest import driver
 
 class OrderPage(BasePage):
 
     def __init__(self, driver):
         self.driver = driver
+        self.base_url = "https://qa-scooter.praktikum-services.ru/"
+
+    @allure.step('Заходим на сайт')
+    def go_to_site(self):
+        return self.driver.get(self.base_url)
 
     @allure.step('Ищем сверху кнопку "Заказать" и нажимаем ее')  # декоратор
-    def Order_button_top_click(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.ORDER_BUTTON_TOP))).click()
+    def order_button_top_click(self):
+        super().find_element_located(OrderPageLocators.ORDER_BUTTON_TOP, 10).click()
 
-    @allure.step('Ищем cнизу кнопку "Заказать" и нажимаем ее')  # декоратор
-    def Order_button_bottom_click(self):
-        element = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.ORDER_BUTTON_BOTTOM)))
+    @allure.step('Ищем внизу кнопку "Заказать" и нажимаем ее')  # декоратор
+    def order_button_bottom_click(self):
+        element = super().find_element_located(OrderPageLocators.ORDER_BUTTON_BOTTOM, 15)
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.ORDER_BUTTON_BOTTOM))).click()
+        super().find_element_located(OrderPageLocators.ORDER_BUTTON_BOTTOM, 10).click()
 
     @allure.step('Заполняем поле "Имя"')
-    def Fill_name_field(self, name):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.NAME_FIELD)))
+    def fill_name_field(self, name):
+        search_field = super().find_element_located(OrderPageLocators.NAME_FIELD,15)
         search_field.send_keys(name)
         return search_field
 
     @allure.step('Заполняем поле "Фамилия"')
-    def Fill_surname_field(self, surname):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.SURNAME_FIELD)))
+    def fill_surname_field(self, surname):
+        search_field = super().find_element_located(OrderPageLocators.SURNAME_FIELD, 15)
         search_field.send_keys(surname)
         return search_field
 
     @allure.step('Заполняем поле "Адрес"')
-    def Fill_address_field(self, address):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.ADDRESS_FIELD)))
+    def fill_address_field(self, address):
+        search_field = super().find_element_located(OrderPageLocators.ADDRESS_FIELD, 15)
         search_field.send_keys(address)
         return search_field
 
     @allure.step('Заполняем поле "Метро"')
-    def Fill_metro_field(self, metro):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.METRO_FIELD))).click()
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((metro)))
+    def fill_metro_field(self, metro):
+        super().find_element_located(OrderPageLocators.METRO_FIELD, 15).click()
+        search_field = super().find_element_located(metro, 15)
         search_field.click()
         return search_field
 
     @allure.step('Заполняем поле "Номер телефона"')
-    def Fill_phone_field(self, phone):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.PHONE_FIELD)))
+    def fill_phone_field(self, phone):
+        search_field = super().find_element_located(OrderPageLocators.PHONE_FIELD, 15)
         search_field.send_keys(phone)
         return search_field
 
     @allure.step('Кликаем по кнопке "Далее"')
-    def Next_button_click(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.COOKIE_BUTTON))).click()
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.NEXT_BUTTON))).click()
+    def next_button_click(self):
+        super().find_element_located(OrderPageLocators.COOKIE_BUTTON, 15).click()
+        super().find_element_located(OrderPageLocators.NEXT_BUTTON, 15).click()
 
     @allure.step('Кликаем по кнопке "Заказать"')
-    def Order_button_click(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.NEXT_BUTTON))).click()
+    def order_button_click(self):
+        super().find_element_located(OrderPageLocators.NEXT_BUTTON, 15).click()
 
     @allure.step('Заполняем поле "Дата доставки"')
-    def Fill_date_field(self, date):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.DATE_FIELD)))
+    def fill_date_field(self, date):
+        search_field = super().find_element_located(OrderPageLocators.DATE_FIELD, 15)
         search_field.send_keys(date)
         return search_field
 
     @allure.step('Заполняем поле "Период доставки"')
-    def Fill_period_field(self, period):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.PERIOD_FIELD))).click()
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((period)))
+    def fill_period_field(self, period):
+        super().find_element_located(OrderPageLocators.PERIOD_FIELD, 15).click()
+        search_field = super().find_element_located(period, 15)
         search_field.click()
         return search_field
 
     @allure.step('Заполняем поле "Цвет"')
-    def Fill_color_field(self, color):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((color)))
+    def fill_color_field(self, color):
+        search_field = super().find_element_located(color, 15)
         search_field.click()
         return search_field
 
     @allure.step('Заполняем поле "Комментарий"')
-    def Fill_comment_field(self, comment):
-        search_field = WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.COMMENT_FIELD)))
+    def fill_comment_field(self, comment):
+        search_field = super().find_element_located(OrderPageLocators.COMMENT_FIELD, 15)
         search_field.send_keys(comment)
         return search_field
 
     @allure.step('Подтверждаем заказ кнопкой "Да"')
-    def Confirm_order(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.CONFIRM_BUTTON))).click()
+    def confirm_order(self):
+        super().find_element_located(OrderPageLocators.CONFIRM_BUTTON, 15).click()
 
-    @allure.step('Нажимаем на логотип "Самокат"')
-    def Samokat_logo_click(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.SAMOKAT_LOGO))).click()
+    @allure.step('Ищем элемент на странице')
+    def find_element(self, locator, time):
+        return super().find_element_located(locator, time)
 
-    @allure.step('Нажимаем на логотип "Яндекс"')
-    def Yandex_logo_click(self):
-        WebDriverWait(self.driver, 10).until(ec.visibility_of_element_located((OrderPageLocators.YANDEX_LOGO))).click()
 
 
 
