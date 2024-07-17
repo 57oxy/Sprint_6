@@ -48,7 +48,7 @@ class TestOrderPage:
         # Подтверждаем заказ
         order_page.confirm_order()
         # Сравниваем текст в поле созданного заказа, там должна быть строка Номер заказа
-        order_text = order_page.find_element(OrderPageLocators.ORDER_TEXT, 15).text
+        order_text = order_page.find_order_text()
         assert 'Номер заказа' in order_text
 
     @allure.title('Тестирование нижней кнопки "Заказать"')
@@ -61,5 +61,5 @@ class TestOrderPage:
         # Кликаем на верхнюю кнопку Заказать снизу
         order_page.order_button_bottom_click()
         # Сравниваем текст на странице оформления заказа должна быть строка Для кого самокат
-        text = order_page.find_element(OrderPageLocators.YANDEX_LOGO_TEXT, 15).text
-        assert text == 'Для кого самокат'
+        yandex_logo_text = order_page.find_yandex_logo_text()
+        assert yandex_logo_text == 'Для кого самокат'

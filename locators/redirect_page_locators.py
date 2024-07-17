@@ -15,5 +15,3 @@ class RedirectPageLocators:
     # Тестирование логотипа Яндекс
     YANDEX_LOGO = (By.XPATH, "//img[@alt='Yandex']")
     YANDEX_LOGO_TEXT = (By.XPATH, "//div[@class='tabs-menu__title-3y tabs-menu__active-1C']")
-#'//div[@class='tabs-menu__title-3y tabs-menu__active-1C']'
-#"//div[@class='Order_Header__BZXOb']"

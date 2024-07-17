@@ -15,3 +15,9 @@ class BasePage:
 
     def find_element_located(self, locator, time=15):
         return WebDriverWait(self.driver, time).until(ec.visibility_of_element_located(locator), message=f'Not found {locator}')
+
+    def scroll_to_body(self):
+        return self.driver.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+
+    def scroll_to_element(self, element):
+        return self.driver.execute_script("arguments[0].scrollIntoView();", element)

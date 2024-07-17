@@ -1,7 +1,6 @@
 import allure
 import pytest
 from page_object.redirect_page import RedirectPage
-from locators.redirect_page_locators import RedirectPageLocators
 from conftest import driver
 
 
@@ -20,7 +19,7 @@ class TestRedirectPage:
         # Кликаем на логотип Самокат
         redirect_page.samokat_logo_click()
         # Сравниваем текст на странице, там должна быть строка Привезём его прямо к вашей двери
-        text = redirect_page.find_element(RedirectPageLocators.SAMOKAT_LOGO_TEXT, 15).text
+        text = redirect_page.find_samokat_logo_text()
         assert 'Привезём его прямо к вашей двери' in text
 
     @allure.title('Проверка логотипа Яндекс')
@@ -32,10 +31,8 @@ class TestRedirectPage:
         redirect_page.go_to_site()
         # Кликаем на логотип Самокат
         redirect_page.yandex_logo_click()
-        # Создаем переменную с значением следующей открытой вкладки
-        window_after = driver.window_handles[1]
         # Переходим на следующую вкладку
-        driver.switch_to.window(window_after)
+        redirect_page.switch_to_next_tab()
         # Сравниваем текст на странице, там должна быть кнопка с текстом Главное
-        text = redirect_page.find_element(RedirectPageLocators.YANDEX_LOGO_TEXT, 10).text
+        text = redirect_page.find_yandex_logo_text()
         assert text == 'Главное'

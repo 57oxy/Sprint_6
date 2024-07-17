@@ -1,16 +1,12 @@
 import allure
-import pytest
 from page_object.base_page import BasePage
 from locators.redirect_page_locators import RedirectPageLocators
-from conftest import driver
+
 
 class RedirectPage(BasePage):
 
-    def __init__(self, driver):
-        self.driver = driver
-        self.base_url = "https://qa-scooter.praktikum-services.ru/"
     def go_to_site(self):
-        return self.driver.get(self.base_url)
+        return super().go_to_site()
 
     @allure.step('Ищем элемент на странице')
     def find_element(self, locator, time):
@@ -27,3 +23,15 @@ class RedirectPage(BasePage):
     @allure.step('Нажимаем на логотип "Яндекс"')
     def yandex_logo_click(self):
         super().find_element_located(RedirectPageLocators.YANDEX_LOGO, 15).click()
+
+    def find_samokat_logo_text(self):
+        return super().find_element_located(RedirectPageLocators.SAMOKAT_LOGO_TEXT, 15).text
+
+    def find_yandex_logo_text(self):
+        return super().find_element_located(RedirectPageLocators.YANDEX_LOGO_TEXT, 10).text
+
+    def switch_to_next_tab(self):
+        # Создаем переменную с значением следующей открытой вкладки
+        window_after = self.driver.window_handles[1]
+        # Переходим на следующую вкладку
+        return self.driver.switch_to.window(window_after)

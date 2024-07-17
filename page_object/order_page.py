@@ -1,18 +1,13 @@
 import allure
-import pytest
 from page_object.base_page import BasePage
 from locators.order_page_locators import OrderPageLocators
-from conftest import driver
 
 class OrderPage(BasePage):
 
-    def __init__(self, driver):
-        self.driver = driver
-        self.base_url = "https://qa-scooter.praktikum-services.ru/"
 
     @allure.step('Заходим на сайт')
     def go_to_site(self):
-        return self.driver.get(self.base_url)
+        return super().go_to_site()
 
     @allure.step('Ищем сверху кнопку "Заказать" и нажимаем ее')  # декоратор
     def order_button_top_click(self):
@@ -21,7 +16,7 @@ class OrderPage(BasePage):
     @allure.step('Ищем внизу кнопку "Заказать" и нажимаем ее')  # декоратор
     def order_button_bottom_click(self):
         element = super().find_element_located(OrderPageLocators.ORDER_BUTTON_BOTTOM, 15)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        super().scroll_to_element(element)
         super().find_element_located(OrderPageLocators.ORDER_BUTTON_BOTTOM, 10).click()
 
     @allure.step('Заполняем поле "Имя"')
@@ -97,6 +92,11 @@ class OrderPage(BasePage):
     def find_element(self, locator, time):
         return super().find_element_located(locator, time)
 
+    def find_order_text(self):
+        return super().find_element_located(OrderPageLocators.ORDER_TEXT, 15).text
+
+    def find_yandex_logo_text(self):
+        return super().find_element_located(OrderPageLocators.YANDEX_LOGO_TEXT, 15).text
 
 
 

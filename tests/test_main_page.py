@@ -29,5 +29,5 @@ class TestMainPage:
         # Переходим на первый вопрос
         main_page.find_question(click, 17)
         # Сравниваем текст на странице с тем, что должен быть
-        text = main_page.get_question_text(panel, 17)
+        text = main_page.get_question_text(panel, 20)
         assert text == verifytext
