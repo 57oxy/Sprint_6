@@ -21,3 +21,9 @@ class BasePage:
 
     def scroll_to_element(self, element):
         return self.driver.execute_script("arguments[0].scrollIntoView();", element)
+
+    def move_to_next_tab(self):
+        # Создаем переменную с значением следующей открытой вкладки
+        window_after = self.driver.window_handles[1]
+        # Переходим на следующую вкладку
+        return self.driver.switch_to.window(window_after)

@@ -17,7 +17,6 @@ class TestOrderPage:
     ])
     def test_order_function(self, driver, name, surname, address, metro, phone, date, period, color, comment):
         # Инициализируем объекты класса
-        #base_page = BasePage(driver)
         order_page = OrderPage(driver)
         # Переходим на страницу ресурса
         order_page.go_to_site()

@@ -31,7 +31,5 @@ class RedirectPage(BasePage):
         return super().find_element_located(RedirectPageLocators.YANDEX_LOGO_TEXT, 10).text
 
     def switch_to_next_tab(self):
-        # Создаем переменную с значением следующей открытой вкладки
-        window_after = self.driver.window_handles[1]
         # Переходим на следующую вкладку
-        return self.driver.switch_to.window(window_after)
+        return super().move_to_next_tab()
